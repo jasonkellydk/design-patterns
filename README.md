@@ -70,6 +70,21 @@ Restricting the instantiation of a class to a single instance, that can be retri
             return instance;
         }
     }
+
+    // Thread safe implementation
+   class Singleton {
+
+       private static Singleton instance;
+
+       private Singleton(){}
+
+       public static synchronized Singleton getInstance(){
+           if(instance == null){
+               instance = new Singleton();
+           }
+           return instance;
+       }
+   }
 ```
 
 #### ** C# **
@@ -77,7 +92,7 @@ Restricting the instantiation of a class to a single instance, that can be retri
 ```csharp
     public class Singleton
     {
-        // Eager instanciation
+        // Eager loading (also makes it thread safe)
         private static readonly Singleton instance = new Singleton();
 
         // private constructor restricted to this class itself
