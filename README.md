@@ -1,34 +1,59 @@
-# Singleton
+# What are Design Patterns?
+
+## what it is
+* Design patterns are optimized, reusable solutions to the programming problems that we encounter every day.
+* It is a template that has to be implemented in the correct situation.
+
+## what it is not
+* A design pattern is not a class or a library that we can simply plug into our system
+
+## There are three basic kinds of design patterns
+
+* structural
+* creational
+* behavioral
+
+**Structural** patterns generally deal with relationships between entities, making it easier for these entities to work together.
+
+**Creational** patterns provide instantiation mechanisms, making it easier to create objects in a way that suits the situation.
+
+**Behavioral** patterns are used in communications between entities and make it easier and more flexible for these entities to communicate.
+
+# Singleton (creational)
 
 In software engineering, the singleton pattern is a software design pattern that restricts the instantiation of a class to one. This is useful when exactly one object is needed to coordinate actions across the system. The term comes from the mathematical concept of a singleton
 
-### Category
+## Intent
+Restricting the instantiation of a class to a single instance, that can be retrieved easily
 
+## Motivation
+* Sometimes we want just a single instance of a class to exist in the system
+* For example, we want just one logging class or just one database connection.
+* We need to have that one instance easily accessible
+* And we want to ensure that additional instances of the class can not be created
 
-### UML Diagram
+## UML Diagram
 
 ![Singleton UML](/assets/uml/singleton.svg)
 
-### Examples
+## Implementation
 
 <!-- tabs:start -->
 
 #### ** Kotlin **
 
 ```kotlin
-    object User {
-        private var test = ""
-    }
+    // The object keyword will create a singleton
+    object Singleton {}
 ```
 
 #### ** Java **
 
 ```java
-    class User
+    class Singleton
     {
-        // static variable single_instance of type Singleton
-        private static User instance = null;
-        private String test = "";
+        // static variable instance of type Singleton
+        private static Singleton instance = null;
 
         // private constructor restricted to this class itself
         private Singleton()
@@ -50,13 +75,13 @@ In software engineering, the singleton pattern is a software design pattern that
 #### ** C# **
 
 ```csharp
-    public class User
+    public class Singleton
     {
-        private String test = "";
-        private static readonly User instance = new User();
+        // Eager instanciation
+        private static readonly Singleton instance = new Singleton();
 
         // private constructor restricted to this class itself
-        private User()
+        private Singleton()
         {
             // Silence is golden
         }
@@ -72,11 +97,23 @@ In software engineering, the singleton pattern is a software design pattern that
 #### ** JavaScript **
 
 ```js
-    class User {
-        test = "";
-    }
+    class Singleton {}
 
-    export new User();
+    // This will always export the same reference of the object
+    export new Singleton();
 ```
 
 <!-- tabs:end -->
+
+## Consequences
+
+Singleton is often considered an anti-pattern because it will often be used in use cases where it should not be applied
+
+## Known uses
+
+Singleton is often used to instantiate and maintain database connections because we are never interested in keeping multiple connections alive.
+
+Singleton can also be used for a logging class because logging usually needs to be used over and over again
+
+## Related patterns
+
